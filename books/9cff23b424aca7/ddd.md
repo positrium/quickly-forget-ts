@@ -1,5 +1,5 @@
 ---
-title: "iHerb Affiliates Link Maker 1"
+title: "iHerb Affiliates Link Maker DDD分析"
 ---
 
 # DDD分析

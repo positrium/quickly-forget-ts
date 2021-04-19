@@ -8,5 +8,7 @@ price: 0 # 有料の場合200〜5000
 chapters:
   - first
   - class
-  - extension-01
+  - ddd
+  - ext-v3
+
 

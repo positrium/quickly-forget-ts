@@ -1,0 +1,23 @@
+{
+  "name": "quickly-forget-ts",
+  "version": "1.0.0",
+  "description": "quickly forget ts grammer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/positrium/quickly-forget-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/positrium/quickly-forget-ts/issues"
+  },
+  "homepage": "https://github.com/positrium/quickly-forget-ts#readme",
+  "dependencies": {
+    "zenn-cli": "^0.1.79"
+  }
+}

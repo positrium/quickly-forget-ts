@@ -1,6 +1,6 @@
 title: "すぐ忘れるtypescriptとjavaの構文差異"
 summary: "元々Javaでclassに親しんで来たので、JavaScriptでもclassで整理したい欲求が増してきました。ですが、微妙にいろいろな言語の予約語が混ざっていて理解が進みません。よって、勉強メモ程度の意味合いで「Javaで書かれたクラス」を「TypeScriptで書かれたクラス」に置き換えて見られるサンプルがあれば良いと思いました。"
-topics: [ts, java]
+topics: [typescript, java]
 published: true
 allow_override: true
 price: 0 # 有料の場合200〜5000

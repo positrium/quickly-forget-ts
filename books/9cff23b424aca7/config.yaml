@@ -6,7 +6,7 @@ allow_override: true
 price: 0 # 有料の場合200〜5000
 # 本に含めるチャプターを順番に並べましょう
 chapters:
-  - 5fded9
-  - 80cc98
+  - first
+  - class
   - 9f1fcc
 

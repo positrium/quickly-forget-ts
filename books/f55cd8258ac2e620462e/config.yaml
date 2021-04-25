@@ -1,0 +1,9 @@
+title: "developing chrome extension mv3"
+summary: "すぐ忘れるchrome拡張の作り方など"
+topics: []
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - first
+  - minimal-settings

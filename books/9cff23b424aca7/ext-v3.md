@@ -9,3 +9,5 @@ title: "iHerb Affiliates Link Maker MV3設計"
 その後、webpackでtsをトランスパイルする流れ。 [参考](https://qiita.com/zaburo/items/26cb6dfb8a631ebbdfbd)
 
 しかし、DDDで構成したtsをトランスパイルするもnamespace周りでトラブル続出。またトランスパイルターゲットはES5とcommonjsのような一般的？なものにしていても、namespace周りのトラブルは解決できないでいる。chromeそのものを使わない方法で問題の切り分け方法を検討する必要がある。
+
+chrome拡張での説明は頓挫するので、よりシンプルなtampermonkeyでの説明に変更します。

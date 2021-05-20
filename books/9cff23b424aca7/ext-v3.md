@@ -2,12 +2,81 @@
 title: "iHerb Affiliates Link Maker MV3設計"
 ---
 
-(書きかけ)
+# typescript と webpack
 
-[MV3](https://developer.chrome.com/docs/extensions/mv3/intro/)が主流になりつつあるのでこれを読みながらvanilla jsで作成中。DDDとは別にMV3での繋げ方を学ばなければならない。
+まずは成果物へのリンクを記載しておきます。
 
-その後、webpackでtsをトランスパイルする流れ。 [参考](https://qiita.com/zaburo/items/26cb6dfb8a631ebbdfbd)
+https://github.com/positrium/iHerb-affiliates-link-maker
 
-しかし、DDDで構成したtsをトランスパイルするもnamespace周りでトラブル続出。またトランスパイルターゲットはES5とcommonjsのような一般的？なものにしていても、namespace周りのトラブルは解決できないでいる。chromeそのものを使わない方法で問題の切り分け方法を検討する必要がある。
+## typescript 開発環境を整える
 
-chrome拡張での説明は頓挫するので、よりシンプルなtampermonkeyでの説明に変更します。
+成果物リンクの先にあるpackage.jsonをそのままnpm installすれば良い。
+
+```yaml
+{
+  "devDependencies": {
+    "@types/chrome": "^0.0.137",
+    "@types/node": "^15.0.2",
+    "copy-webpack-plugin": "^8.1.1",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "yarn": "^1.22.10"
+  }
+}
+```
+
+上記のpackageをインストールすれば開発環境は整います。これに加えて intellij idea ultimate を使っていますが intellij idea ce でもその他エディタを使っても問題ないと思います。
+
+## webpack
+
+手慣れてない人には「css や image を圧縮するやつ？」のように見えるwebpackですが、buildスクリプト相当でした。下記の通り、jsで書かれたbuildスクリプトで、（１）読み込みたいtsファイルentry（２）書き出したいディレクトリ定義（３）トランスパイラの設定（４）その他ファイルのコピー設定の４項目に分かれています。
+
+```js
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+
+module.exports = {
+    mode: process.env.NODE_ENV || "development",
+    entry: {
+        background: path.join(__dirname, "src/background.ts"),
+        options: path.join(__dirname, "src/Options.ts"),
+        popups: path.join(__dirname, "src/Popup.ts"),
+    },
+    output: {
+        path: path.join(__dirname, "dist"),
+        filename: "[name].js",
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader",
+                exclude: /(node_modules|dev)/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                path.resolve(__dirname, "src/interfaces/ui", "options.html"),
+                path.resolve(__dirname, "src/interfaces/ui", "popup.html"),
+                {from: "./public", to: "../dist"}
+            ]
+        })
+    ],
+    devtool: false
+};
+```
+
+## ハマりどころ
+
+tsのclassをjavaやその他のようにpackageで括るノリでnamespaceやmoduleで多階層に掘り下げると、トランスパイル後のjsで実ファイルと識別子（domain.affiliate.AffiliateIDのような文字列）の対応が外れてしまい、オブジェクトの参照が出来ない、ということが起こりました。
+
+未検証ですが、moduleよりもnamespaceが誤作動の原因だった可能性があります。後に検証する予定です。

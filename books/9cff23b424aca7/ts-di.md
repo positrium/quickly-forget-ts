@@ -11,7 +11,7 @@ title: "ts di lib researches"
 
 tsでDDDでchrome extensionを作りたいと思った場合、Repositoryパターンの実現で依存関係をどう解決するかという問題に突き当たりました。Javaの場合はDIツールが揃っているので息をするように`@Inject`や`Interface`で定形作業を行うだけですが、jsに関してはその辺りの知識が薄いことから、改めてDIライブラリについて調べる必要がありました。
 
-今回は、一番お手軽な方法でRepositoryパターンが実装できる事を念頭に調べています。例えば、古代のDIのように手動bindを要求するものは除外しています。せっかく`implements interface`が使える言語なのでそれをクラスパスから拾って依存関係を自動解決してくれなくては困ります。無論、DIを使うシーンでinterfaceとその実装クラスがペアになって存在している、なんてことはあり得ないので手動bindが悪いとは言いませんが、今回の用途ではペアは必須条件なので、手動bindとペア自動解決が出来る事が最低条件になります。
+今回は、DDD的かつ一番お手軽な方法でRepositoryパターンが実装できる事を念頭に調べています。JSはJavaと違ってクラスパスが存在しないからか、自動bindは不得意のようです。よって、手動bindであっても実験対象になりました。対象外は「記述量が多すぎる」「DIの為に新たなファイルを要求する」「DIのためだけじゃないライブラリ」などです。
 
 
 
@@ -65,6 +65,10 @@ ms製軽量DIコンテナ
 - 手動bind必須。
 - interfaceにDIできる
 - Constructor injection only
+
+
+
+constructor injection のみだが、特に問題はないと思う。見栄えの面では property injectionが一番キレイだけど、DIを使わないとテスト出来ないようなクラスになってしまうのでアンチパターンだと思うし、setter injectionはまあconstructor injectionできればオプショナルだと思う。
 
 ```ts
 // ItemRepositoryTsyringeImpl.ts

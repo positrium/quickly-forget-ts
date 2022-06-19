@@ -2,6 +2,10 @@
 title: "はじめに"
 ---
 
+# 注意
+
+typescriptをよく分かってないjavaの人が書いています。各方面で正しいとは言えない解説になっています。
+
 # 参考
 
 - https://future-architect.github.io/typescript-guide/
